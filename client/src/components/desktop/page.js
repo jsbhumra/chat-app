@@ -10,7 +10,7 @@ function DesktopHome({ socket }) {
         <div className='absolute top-[2.5%] left-[2.5%] h-[95%] w-[95%] flex justify-between'>
             <ChatLeft socket={socket} chat={chat} setChat={setChat} />
             <div className='w-[1px] h-4/5 mt-[5%] bg-[#bebebe]'></div>
-            <ChatRight />
+            <ChatRight socket={socket} chat={chat} />
         </div>
     </div>
   )
