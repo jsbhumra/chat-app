@@ -14,12 +14,29 @@ const socketIO = require('socket.io')(http, {
     }
 })
 
+let activeUsers = []
+
 socketIO.on('connection', (socket)=>{
     console.log(`${socket.id} user just connected!`);
-    socket.on('disconnect', ()=>{
-        console.log('A user just disconnected');
-    })
+    socketIO.emit('userChange', activeUsers);
+
+    socket.on('addUser', (data) => {
+        activeUsers.push(data);
+        socketIO.emit('userChange', activeUsers);
+      });
+
+    socket.on('disconnect', () => {
+        console.log('🔥: A user disconnected');
+
+        activeUsers = activeUsers.filter((user) => user.socketID !== socket.id);
+
+        socketIO.emit('userChange', activeUsers);
+        socket.disconnect();
+      });
+
 })
+
+
 
 app.get('/api',(req,res)=>{
     res.json({

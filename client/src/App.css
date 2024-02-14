@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.neuLarge {
+  border-radius: 50px;
+  background: #e0e0e0;
+  box-shadow: inset 35px 35px 34px #bebebe,
+              inset -35px -35px 34px #ffffff;
+}
