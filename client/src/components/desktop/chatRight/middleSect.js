@@ -18,14 +18,14 @@ function MiddleSect({ socket }) {
         {messages.map((el,i,arr)=>{
             if(el.socketID==socket.id){
                 if(i!=0 && arr[i-1].socketID==el.socketID){
-                    return(<SentMess details={el} />)
+                    return(<SentMess key={`${socket.id}-message-${i}`} details={el} />)
                 }
-                return(<SentMessTop details={el} />)
+                return(<SentMessTop key={`${socket.id}-message-${i}`} details={el} />)
             } else {
                 if(i!=0 && arr[i-1].socketID==el.socketID){
-                    return(<RecMess details={el} />)
+                    return(<RecMess key={`${socket.id}-message-${i}`} details={el} />)
                 }
-                return(<RecMessTop details={el} />)
+                return(<RecMessTop key={`${socket.id}-message-${i}`} details={el} />)
             }
         })}
     </div>

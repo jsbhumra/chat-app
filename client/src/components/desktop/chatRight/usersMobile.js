@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function BottomSect({ users, chat, socket }) {
+function UsersMobile({ users, chat, socket, setShowUsers }) {
   const currUser = localStorage.getItem("userName")
 
   return (
@@ -10,7 +10,7 @@ function BottomSect({ users, chat, socket }) {
         <div className='flex flex-wrap gap-x-5 gap-y-3 py-3'>
           {users.map((el,i)=>{
             return(
-              <div key={`${el.username}-icon`} className={`flex bg-white px-3 py-1 rounded-full ${el.username==currUser && "outline outline-4 outline-lime-500"}`}>
+              <div key={`${el.username}-iconMob`} className={`flex bg-white px-3 py-1 rounded-full ${el.username==currUser && "outline outline-4 outline-lime-500"}`}>
                 <div className='w-[30px] h-[30px] rounded-full mr-2'>
                   <img src={`./avatars/${el.avatar}`} />
                 </div>
@@ -20,8 +20,9 @@ function BottomSect({ users, chat, socket }) {
           })}
         </div>
       </div>
+      <button onClick={()=>setShowUsers(false)} className={`absolute top-3 left-2 w-[32.5px] h-[32.5px] rounded-full border-2 border-red-500 hover:bg-red-500 text-center text-red-500 hover:text-white font-semibold`}>&larr;</button>
     </div>
   )
 }
 
-export default BottomSect
+export default UsersMobile

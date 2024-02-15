@@ -10,7 +10,7 @@ app.use(cors());
 
 const socketIO = require('socket.io')(http, {
     cors: {
-        origin: 'http://localhost:3000'
+        origin: '*'
     }
 })
 
@@ -37,7 +37,7 @@ socketIO.on('connection', (socket)=>{
         socketIO.emit('userChange', activeUsers);
         socketIO.emit('chatDisc')
         socket.disconnect();
-      });
+    });
 
 })
 

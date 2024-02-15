@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 import DesktopHome from '../components/desktop/page'
+import {isMobile} from 'react-device-detect';
+import MobileHome from '../components/mobile/page';
 
 function Chat({ socket }) {
 
@@ -8,7 +10,10 @@ function Chat({ socket }) {
     localStorage.setItem('avatar', '');
   },[])
 
-  return (
+  if(isMobile) return (
+    <MobileHome socket={socket} />
+  )
+  else return (
     <DesktopHome socket={socket} />
   )
 }

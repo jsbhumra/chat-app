@@ -3,7 +3,7 @@ import Constants from '../../../Constants'
 
 const avatarList = Constants.avatarList;
 
-function TopSect({ users, socket, setChat }) {
+function TopSect({ socket, chat, setChat, users }) {
     const [userName,setUserName] = useState('')
     const [userErr,setUserErr] = useState("false")
     const [avatar,setAvatar] = useState('actress.svg')
@@ -25,12 +25,14 @@ function TopSect({ users, socket, setChat }) {
         setUserErr("false")
         localStorage.setItem('userName', userName);
         localStorage.setItem('avatar', avatar);
+        const textColor = avatarList.filter((el)=>el["url"]==avatar)[0]["bg"];
+        localStorage.setItem('textColor', textColor);
         socket.emit('addUser', { username: userName, avatar: avatar, socketID: socket.id });
         setChat(true);
     }
 
   return (
-    <div className='my-2 p-2 w-full h-1/2 flex flex-col items-center'>
+    <div className={`my-2 p-2 w-full h-auto flex flex-col items-center ${chat && "blur-sm pointer-events-none"}`}>
         <div className='flex'>
             <p className='text-md font-semibold underline'>Welcome to <span className='text-xl font-bold'>ChatApp!</span></p>
         </div>

@@ -3,7 +3,7 @@ import React from 'react'
 function RecMess({ details }) {
   return (
     <div className='flex justify-start'>
-        <div className="relative rounded-lg bg-[#edcce7] max-w-[60%] px-3 py-1 ml-10 my-0 w-auto outline-1 outline-dashed -outline-offset-2">
+        <div className={`relative rounded-lg max-w-[60%] px-3 py-1 ml-10 my-0 w-auto outline-1 outline-dashed -outline-offset-2`} style={{ backgroundColor: details.textColor }}>
             {/* <div className='underline text-sm font-semibold'>{details.username}:</div> */}
             <div>{details.text}</div>
             {/* <div className='absolute w-0 h-0 border-t-[15px] border-t-[#edcce7] border-l-[15px] border-l-transparent -left-[9px] top-0'></div>
