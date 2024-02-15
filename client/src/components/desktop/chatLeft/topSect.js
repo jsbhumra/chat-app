@@ -18,7 +18,10 @@ function TopSect({ users, socket, setChat }) {
             setUserErr("error")
             return;
         }
-        if(localStorage.getItem('userName')!='') return;
+        if(localStorage.getItem('userName')!=''){
+            setUserErr("alreadyIn")
+            return;
+        }
         setUserErr("false")
         localStorage.setItem('userName', userName);
         localStorage.setItem('avatar', avatar);
@@ -39,8 +42,8 @@ function TopSect({ users, socket, setChat }) {
             <div className='grid grid-cols-5 gap-4 py-3'>
                 {avatarList.map((el,i)=>{
                     return(
-                    <div key={`avatar${i}`} onClick={()=>setAvatar(el)} className={`cursor-pointer rounded-full w-[50px] h-[50px] ${avatar==el && "outline outline-4 outline-blue-500 outline-offset-2"} `}>
-                        <img src={`./avatars/${el}`} />
+                    <div key={`avatar${i}`} onClick={()=>setAvatar(el["url"])} className={`cursor-pointer rounded-full w-[50px] h-[50px] ${avatar==el["url"] && "outline outline-4 outline-blue-500 outline-offset-2"} `}>
+                        <img src={`./avatars/${el["url"]}`} />
                     </div>)
                 })}
                 
@@ -48,6 +51,7 @@ function TopSect({ users, socket, setChat }) {
             <button type='submit' className='border-2 border-[#000] px-3 py-2 w-1/2 ml-[25%]'>Start chatting!</button>
             {userErr=="error" && <p className='text-red-400 text-sm text-center'>User with the same username already exists!</p>}
             {userErr=="empty" && <p className='text-red-400 text-sm text-center'>Username field cannot be empty!</p>}
+            {userErr=="alreadyIn" && <p className='text-red-400 text-sm text-center'>You are already in the chat!</p>}
         </form>
     </div>
   )

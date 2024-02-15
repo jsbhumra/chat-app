@@ -23,7 +23,11 @@ socketIO.on('connection', (socket)=>{
     socket.on('addUser', (data) => {
         activeUsers.push(data);
         socketIO.emit('userChange', activeUsers);
-      });
+    });
+
+    socket.on('newMess', (data) => {
+        socketIO.emit('newMessResp', data);
+    });
 
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
@@ -31,6 +35,7 @@ socketIO.on('connection', (socket)=>{
         activeUsers = activeUsers.filter((user) => user.socketID !== socket.id);
 
         socketIO.emit('userChange', activeUsers);
+        socketIO.emit('chatDisc')
         socket.disconnect();
       });
 
